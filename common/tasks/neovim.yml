@@ -1,0 +1,32 @@
+---
+- name: add neovim ppa
+  apt_repository:
+    repo: 'ppa:neovim-ppa/unstable'
+    state: present
+    update_cache: yes
+  become : yes
+  become_method: sudo
+
+- name: install neovim 
+  apt: 
+    name: neovim 
+    update_cache: yes
+  become : yes
+  become_method: sudo
+
+- name: vim | Remove standard .vimrc
+  file: path=~/.vimrc state=absent
+
+- name: vim | Deploy new .vimrc
+  template: src=common/files/vimrc dest=~/.vimrc owner=steven
+
+- name: vim | copy files
+  copy:
+    src: "common/files/vim/{{ item }}" 
+    dest: "~/.vim"
+    owner: steven
+  with_items:
+   - "after"
+
+- name: neovim config
+  shell: ln -s ~/.vimrc ~/.config/nvim/init.vim

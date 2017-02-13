@@ -1,0 +1,7 @@
+---
+- name: install vagrant
+  apt: 
+    name: vagrant
+    update_cache: yes
+  become : yes
+  become_method: sudo

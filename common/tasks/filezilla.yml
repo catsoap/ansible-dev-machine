@@ -1,0 +1,7 @@
+---
+- name: install filezilla
+  apt:
+    name: filezilla
+    update_cache: yes
+  become: yes
+  become_method: sudo

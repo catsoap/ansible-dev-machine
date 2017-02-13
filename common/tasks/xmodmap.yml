@@ -1,0 +1,6 @@
+---
+- name: xmodmap - copy
+  template: src=common/files/Xmodmap dest=~/.Xmodmap owner=steven
+
+- name: xmodmap - exec
+  command: "xmodmap ~/.Xmodmap"

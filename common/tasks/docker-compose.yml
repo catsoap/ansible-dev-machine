@@ -1,0 +1,17 @@
+---
+
+- name: Installing packages
+  apt:
+    name: "{{item}}"
+    update_cache: yes
+    state: present
+  with_items:
+  - python-setuptools
+  - python-pip 
+  become: yes
+  become_method: sudo
+
+- name: Installing docker compose
+  pip:
+    name: docker-compose
+    state: present

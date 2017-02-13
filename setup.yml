@@ -1,0 +1,6 @@
+- name: dev machine base on ubuntu voyager 16.04 
+  hosts: local
+  connection: local
+  roles:
+    - common
+

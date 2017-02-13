@@ -1,0 +1,7 @@
+---
+- name: install virtualbox
+  apt: 
+    name: virtualbox
+    update_cache: yes
+  become : yes
+  become_method: sudo

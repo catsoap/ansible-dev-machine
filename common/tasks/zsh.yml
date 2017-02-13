@@ -1,0 +1,29 @@
+---
+- name: install zsh
+  apt: 
+    name: zsh
+    update_cache: yes
+  become : yes
+  become_method: sudo
+
+- name: oh-my-zsh | Clone down repository
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
+
+- name: oh-my-zsh | Remove standard .zshrc
+  file: path=~/.zshrc state=absent
+
+- name: oh-my-zsh | Deploy new .zshrc
+  template: src=common/files/zshrc dest=~/.zshrc owner=steven
+  
+- name: oh-my-zsh | Deploy new .zshenv
+  template: src=common/files/zshenv dest=~/.zshenv owner=steven
+
+- name: set zsh as default shell
+  user: name=steven shell=/usr/bin/zsh
+
+- name: install jq
+  apt: 
+    name: jq
+    update_cache: yes
+  become : yes
+  become_method: sudo

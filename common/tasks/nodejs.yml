@@ -1,0 +1,12 @@
+- name: install nvm
+  shell: >
+    curl https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | sh
+    creates=~/.nvm/nvm.sh
+
+- name: install node and set version
+  shell: >
+    /bin/zsh -c "source ~/.zshrc && nvm install node && nvm use node"
+
+- name: install yarn
+  shell: >
+    /bin/zsh -c "source ~/.zshrc && npm install -g yarn"

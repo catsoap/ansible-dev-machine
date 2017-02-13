@@ -1,0 +1,36 @@
+---
+- name: check if Source Code Pro fonts exists
+  stat:
+    path: ~/.fonts/SourceCodePro-Black.otf
+  register: source_code_pro_font
+
+- name: install source-code-pro - download font
+  get_url:
+    url: https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip
+    dest: "/tmp/source_code_pro.zip"
+    mode: 0755
+  when: not source_code_pro_font.stat.exists
+
+- name: install source-code-pro - ensure tmp directory exists
+  file:
+    state: directory
+    path: /tmp/source_code_pro
+  when: not source_code_pro_font.stat.exists
+
+- name: install source-code-pro - unzip downloaded font
+  unarchive:
+    src: "/tmp/source_code_pro.zip"
+    dest: "/tmp/source_code_pro"
+  when: not source_code_pro_font.stat.exists
+
+- name: install source-code-pro - copy font
+  synchronize: 
+    src: "/tmp/source_code_pro/source-code-pro-1.017R/OTF/"
+    dest: "~/.fonts/"
+  when: not source_code_pro_font.stat.exists
+
+- name: install source-code-pro - font cache
+  command: fc-cache -f -v
+  become : yes
+  become_method: sudo
+  when: not source_code_pro_font.stat.exists

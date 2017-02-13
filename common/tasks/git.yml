@@ -1,0 +1,19 @@
+- name: install git 
+  apt:
+    name: git 
+    update_cache: yes
+    state: present
+  become: yes
+  become_method: sudo
+
+- name: git | Remove gitconfig
+  file: path=~/.gitconfig state=absent
+
+- name: git | Deploy new .gitconfig
+  template: src=common/files/gitconfig dest=~/.gitconfig owner=steven
+
+- name: git | Remove gitignore_global
+  file: path=~/.gitignore_global state=absent
+
+- name: git | Deploy new .gitconfig
+  template: src=common/files/gitignore_global dest=~/.gitignore_global owner=steven
