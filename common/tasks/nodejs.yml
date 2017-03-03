@@ -10,3 +10,7 @@
 - name: install yarn
   shell: >
     /bin/zsh -c "source ~/.zshrc && npm install -g yarn"
+
+- name: install diff-so-fancy 
+  shell: >
+    /bin/zsh -c "source ~/.zshrc && npm install -g diff-so-fancy"

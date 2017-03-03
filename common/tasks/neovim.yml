@@ -28,5 +28,13 @@
   with_items:
    - "after"
 
+- name: neovim config dir
+  file:
+    path: ~/.config/nvim
+    state: directory
+
 - name: neovim config
-  shell: ln -s ~/.vimrc ~/.config/nvim/init.vim
+  file: 
+    src: ~/.vimrc 
+    dest: ~/.config/nvim/init.vim
+    state: link

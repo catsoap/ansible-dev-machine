@@ -20,6 +20,8 @@
 
 - name: set zsh as default shell
   user: name=steven shell=/usr/bin/zsh
+  become : yes
+  become_method: sudo
 
 - name: install jq
   apt: 
