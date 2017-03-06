@@ -29,3 +29,6 @@
     update_cache: yes
   become : yes
   become_method: sudo
+
+- name: oh-my-zsh | XFCE Terminal colors 
+  template: src=common/files/terminalrc dest=~/.config/xfce4/terminal/terminalrc owner=steven
